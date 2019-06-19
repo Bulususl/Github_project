@@ -1,7 +1,6 @@
 package com.training.pom;
 
-
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
 
 import java.util.concurrent.TimeUnit;
 
@@ -9,12 +8,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
-public class LoginPOM {
+public class LoginPOM_UniformLogin_PasswordChange {
 	private WebDriver driver; 
 	
 	// Initializing the driver for the Webdriver and Initializing the webdriver from the factory
-	public LoginPOM(WebDriver driver) {
+	public LoginPOM_UniformLogin_PasswordChange(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
@@ -35,8 +35,6 @@ public class LoginPOM {
 		this.loginBtn.click(); 
 	}*/
 	
-	// First Test cases - DIFFICULTY LEVEL - LOW
-	
 	@FindBy(css=".fa-user")
 	private WebElement MyAccountIcon;
 	
@@ -52,14 +50,11 @@ public class LoginPOM {
 	@FindBy(css="input.btn")
 	private WebElement LoginActual;
 	
-	@FindBy(css="a.list-group-item:nth-child(6)")
+	/*@FindBy(css="a.list-group-item:nth-child(6)")
 	private WebElement OrderHistoryLink;
 	
 	@FindBy(css="a.btn")
-	private WebElement ContinueButtonOnOrderHistoryPage;
-	
-	@FindBy(css="#content > h1:nth-child(2)")
-	private WebElement orderHistoryText;
+	private WebElement ContinueButtonOnOrderHistoryPage;*/
 	
 	public void ClickMyAccountIcon() {
 		this.MyAccountIcon.click();
@@ -83,71 +78,10 @@ public class LoginPOM {
 		this.LoginActual.click();
 	}
 	
-	public void ClickOrderHistory() {
-		this.OrderHistoryLink.click();
-	}
-	
-	public void ClickContinueButtonOnOrderHistoryPage() {
-		this.ContinueButtonOnOrderHistoryPage.click();
-	}
-	
-	public void orderHistoryPageCheck(){
-		this.orderHistoryText.getText();
-		assertTrue(this.orderHistoryText.getText().contains("ORDER HISTORY"));
-		System.out.println("This is Order History Page");
-	}
 	
 	
 	
-	// Second Test cases - DIFFICULTY LEVEL - MEDIUM
-	
-	@FindBy(css="ul.content:nth-child(4) > li:nth-child(1) > a:nth-child(1)")
-	private WebElement EditYourAccountInfoLink;
-	
-	public void ClickEditAccountInfoLink() {
-		this.EditYourAccountInfoLink.click();
-	}
-	
-	@FindBy(css="#input-firstname")
-	private WebElement editfirstName;
-	
-	public void sendCorrectFirstName(String editfirstName) {
-		this.editfirstName.clear();
-		this.editfirstName.sendKeys(editfirstName);
-	}
-	
-	@FindBy(css="#input-lastname")
-	private WebElement editlastName;
-	
-	public void sendCorrectLastName(String editlastName) {
-		this.editlastName.clear();
-		this.editlastName.sendKeys(editlastName);
-	}
-	
-	@FindBy(css="#input-email")
-	private WebElement EditEmail;
-	
-	public void sendCorrectEmail(String EditEmail) {
-		this.EditEmail.clear();
-		this.EditEmail.sendKeys(EditEmail);
-	}
-	
-	@FindBy(css="#input-telephone")
-	private WebElement EditPhone;
-	
-	public void sendCorrectPhone(String EditPhone) {
-		this.EditPhone.clear();
-		this.EditPhone.sendKeys(EditPhone);
-	}
-	
-	@FindBy(css="input.btn")
-	private WebElement ContinueButtonOnEditInfoPage;
-	
-	public void ClickContinueButtonOnEditInfoPage() {
-		this.ContinueButtonOnEditInfoPage.click();
-	}
-	
-	// Third Test cases - DIFFICULTY LEVEL - HIGH
+	// Third Test cases - PRIORITY LEVEL - HIGH
 	
 	@FindBy(css="ul.content:nth-child(4) > li:nth-child(2) > a:nth-child(1)")
 	private WebElement ChangeYourPasswordLink;
@@ -177,6 +111,19 @@ public class LoginPOM {
 	
 	public void clickContinueToConfirmNewPassword() {
 		this.continueToConfirmNewPassword.click();
+	}
+	
+	//<-----------------------------ASSERT STATEMENT-------------------------------------------->//
+	@FindBy(css=".alert")
+	private WebElement afterPasswordChangeAlert;
+	
+	public void passwordChangeStatusAlert(){
+		this.afterPasswordChangeAlert.getText();
+		//assertTrue(this.afterEditSuccessAlert.getText().contains("Success: Your password has been successfully updated."));
+		
+		
+		Assert.assertEquals(this.afterPasswordChangeAlert.getText(),"Success: Your password has been successfully updated.");
+		System.out.println("Your account password has been changed successfully.");
 	}
 	
 }

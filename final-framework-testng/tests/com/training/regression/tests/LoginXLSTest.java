@@ -52,9 +52,9 @@ public class LoginXLSTest {
 
 	@Test(dataProvider = "xls-inputs", dataProviderClass = LoginDataProviders.class)
 	public void loginDBTest(String userName, String password) {
-		loginPOM.sendUserName(userName);
+		loginPOM.sendEmailId(userName);
 		loginPOM.sendPassword(password);
-		loginPOM.clickLoginBtn();
+		loginPOM.ClickLoginActual();
 		screenShot.captureScreenShot(userName);
 
 	}

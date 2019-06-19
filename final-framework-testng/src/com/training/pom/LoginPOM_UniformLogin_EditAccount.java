@@ -1,20 +1,19 @@
 package com.training.pom;
 
-
 import static org.testng.Assert.assertTrue;
-
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
-public class LoginPOM {
+public class LoginPOM_UniformLogin_EditAccount {
 	private WebDriver driver; 
 	
 	// Initializing the driver for the Webdriver and Initializing the webdriver from the factory
-	public LoginPOM(WebDriver driver) {
+	public LoginPOM_UniformLogin_EditAccount(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
@@ -35,8 +34,6 @@ public class LoginPOM {
 		this.loginBtn.click(); 
 	}*/
 	
-	// First Test cases - DIFFICULTY LEVEL - LOW
-	
 	@FindBy(css=".fa-user")
 	private WebElement MyAccountIcon;
 	
@@ -52,14 +49,13 @@ public class LoginPOM {
 	@FindBy(css="input.btn")
 	private WebElement LoginActual;
 	
-	@FindBy(css="a.list-group-item:nth-child(6)")
+	
+	
+	/* @FindBy(css="a.list-group-item:nth-child(6)")
 	private WebElement OrderHistoryLink;
 	
 	@FindBy(css="a.btn")
-	private WebElement ContinueButtonOnOrderHistoryPage;
-	
-	@FindBy(css="#content > h1:nth-child(2)")
-	private WebElement orderHistoryText;
+	private WebElement ContinueButtonOnOrderHistoryPage; */
 	
 	public void ClickMyAccountIcon() {
 		this.MyAccountIcon.click();
@@ -83,23 +79,9 @@ public class LoginPOM {
 		this.LoginActual.click();
 	}
 	
-	public void ClickOrderHistory() {
-		this.OrderHistoryLink.click();
-	}
-	
-	public void ClickContinueButtonOnOrderHistoryPage() {
-		this.ContinueButtonOnOrderHistoryPage.click();
-	}
-	
-	public void orderHistoryPageCheck(){
-		this.orderHistoryText.getText();
-		assertTrue(this.orderHistoryText.getText().contains("ORDER HISTORY"));
-		System.out.println("This is Order History Page");
-	}
 	
 	
-	
-	// Second Test cases - DIFFICULTY LEVEL - MEDIUM
+	// Second Test cases - PRIORITY LEVEL - MEDIUM
 	
 	@FindBy(css="ul.content:nth-child(4) > li:nth-child(1) > a:nth-child(1)")
 	private WebElement EditYourAccountInfoLink;
@@ -147,36 +129,18 @@ public class LoginPOM {
 		this.ContinueButtonOnEditInfoPage.click();
 	}
 	
-	// Third Test cases - DIFFICULTY LEVEL - HIGH
+	//<-----------------------------ASSERT STATEMENT-------------------------------------------->//
+	@FindBy(css=".alert")
+	private WebElement afterEditSuccessAlert;
 	
-	@FindBy(css="ul.content:nth-child(4) > li:nth-child(2) > a:nth-child(1)")
-	private WebElement ChangeYourPasswordLink;
-	public void ClickChangeYourPasswordLink() {
-		this.ChangeYourPasswordLink.click();
-	}
-	
-	@FindBy(css="#input-password")
-	private WebElement newPassword;
-	public void sendNewPassword(String newPassword) {
-		this.newPassword.clear();
-		this.newPassword.sendKeys(newPassword);
-	}
-	
-	@FindBy(css="#input-confirm")
-	private WebElement confirmNewPassword;
-	
-	public void sendConfirmNewPassword(String confirmNewPassword) {
-		this.confirmNewPassword.clear();
-		this.confirmNewPassword.sendKeys(confirmNewPassword);
+	public void orderHistoryPageCheck(){
+		this.afterEditSuccessAlert.getText();
+		//assertTrue(this.afterEditSuccessAlert.getText().contains("Success: Your account has been successfully updated."));
 		
+		
+		Assert.assertEquals(this.afterEditSuccessAlert.getText(),"Success: Your account has been successfully updated.");
+		System.out.println("The account modification has been successful.");
 	}
 	
-	
-	@FindBy(css="input.btn")
-	private WebElement continueToConfirmNewPassword;
-	
-	public void clickContinueToConfirmNewPassword() {
-		this.continueToConfirmNewPassword.click();
-	}
 	
 }

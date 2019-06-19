@@ -1,5 +1,6 @@
 package com.training.sanity.tests;
 
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -12,15 +13,18 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.training.generics.ScreenShot;
-import com.training.pom.LoginPOM;
+//import com.training.pom.LoginPOM;
+import com.training.pom.LoginPOM_UniformLogin_EditAccount;
 import com.training.utility.DriverFactory;
 import com.training.utility.DriverNames;
 
-public class LoginTests {
+
+public class LoginTests_UniformLogin_EditAccount {
 
 	private WebDriver driver;
 	private String baseUrl;
-	private LoginPOM loginPOM;
+	//private LoginPOM loginPOM;
+	private LoginPOM_UniformLogin_EditAccount LoginPOM_UniformLogin_EditAccount;
 	private static Properties properties;
 	private ScreenShot screenShot;
 
@@ -34,7 +38,8 @@ public class LoginTests {
 	@BeforeMethod
 	public void setUp() throws Exception {
 		driver = DriverFactory.getDriver(DriverNames.FIREFOX);
-		loginPOM = new LoginPOM(driver); 
+		//loginPOM = new LoginPOM(driver);
+		LoginPOM_UniformLogin_EditAccount = new LoginPOM_UniformLogin_EditAccount(driver);
 		baseUrl = properties.getProperty("baseURL");
 		screenShot = new ScreenShot(driver); 
 		// open the URL in the browser
@@ -50,35 +55,34 @@ public class LoginTests {
 	@Test
 	public void validLoginTest() {
 		
+		
+		
 		/*loginPOM.sendUserName("admin");
 		loginPOM.sendPassword("admin@123");
 		loginPOM.clickLoginBtn();
 	    screenShot.captureScreenShot("First");*/
+		
+	
+		LoginPOM_UniformLogin_EditAccount.ClickMyAccountIcon();
+		LoginPOM_UniformLogin_EditAccount.ClickLoginDropDown();	
+		LoginPOM_UniformLogin_EditAccount.sendEmailId("snehalata3@gmail.com");
+		LoginPOM_UniformLogin_EditAccount.sendPassword("sneha123");
+		LoginPOM_UniformLogin_EditAccount.ClickLoginActual();
+				
 	    
-		// First Test cases - Priority - LOW
-		loginPOM.ClickMyAccountIcon();
-		loginPOM.ClickLoginDropDown();	
-		loginPOM.sendEmailId("snbulusu3@gmail.com");
-		loginPOM.sendPassword("sneha1234567");
-		loginPOM.ClickLoginActual();
-		loginPOM.ClickOrderHistory();
-		loginPOM.ClickContinueButtonOnOrderHistoryPage();
+		
 		
 		// Second Test cases - Priority - MEDIUM 
-		loginPOM.ClickEditAccountInfoLink();
-		loginPOM.sendCorrectFirstName("SnehaLataNew4");
-		loginPOM.sendCorrectLastName("BulusuNew4");
-		loginPOM.sendCorrectEmail("snbulusu4@gmail.com");
-		loginPOM.sendCorrectPhone("8971154491");
-		loginPOM.ClickContinueButtonOnEditInfoPage();
+		LoginPOM_UniformLogin_EditAccount.ClickEditAccountInfoLink();
+		LoginPOM_UniformLogin_EditAccount.sendCorrectFirstName("Sneha4");
+		LoginPOM_UniformLogin_EditAccount.sendCorrectLastName("Lata4");
+		LoginPOM_UniformLogin_EditAccount.sendCorrectEmail("snehalata4@gmail.com");
+		LoginPOM_UniformLogin_EditAccount.sendCorrectPhone("9876543214");
+		LoginPOM_UniformLogin_EditAccount.ClickContinueButtonOnEditInfoPage();
+		LoginPOM_UniformLogin_EditAccount.orderHistoryPageCheck();
 		
-		// Third Test cases - Priority - HIGH
 		
-		loginPOM.ClickChangeYourPasswordLink();
-		loginPOM.sendNewPassword("sneha12345678");
-		loginPOM.sendConfirmNewPassword("sneha12345678");
-		loginPOM.clickContinueToConfirmNewPassword();
-		
+	
 		
 	}
 }

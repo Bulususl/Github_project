@@ -12,15 +12,17 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.training.generics.ScreenShot;
-import com.training.pom.LoginPOM;
+//import com.training.pom.LoginPOM;
+import com.training.pom.LoginPOM_UniformLogin_PasswordChange;
 import com.training.utility.DriverFactory;
 import com.training.utility.DriverNames;
 
-public class LoginTests {
+public class LoginTests_UniformLogin_PasswordChange {
 
 	private WebDriver driver;
 	private String baseUrl;
-	private LoginPOM loginPOM;
+	//private LoginPOM loginPOM;
+	private LoginPOM_UniformLogin_PasswordChange LoginPOM_UniformLogin_PasswordChange;
 	private static Properties properties;
 	private ScreenShot screenShot;
 
@@ -34,7 +36,8 @@ public class LoginTests {
 	@BeforeMethod
 	public void setUp() throws Exception {
 		driver = DriverFactory.getDriver(DriverNames.FIREFOX);
-		loginPOM = new LoginPOM(driver); 
+		//loginPOM = new LoginPOM(driver); 
+		LoginPOM_UniformLogin_PasswordChange = new LoginPOM_UniformLogin_PasswordChange(driver);
 		baseUrl = properties.getProperty("baseURL");
 		screenShot = new ScreenShot(driver); 
 		// open the URL in the browser
@@ -54,31 +57,22 @@ public class LoginTests {
 		loginPOM.sendPassword("admin@123");
 		loginPOM.clickLoginBtn();
 	    screenShot.captureScreenShot("First");*/
-	    
-		// First Test cases - Priority - LOW
-		loginPOM.ClickMyAccountIcon();
-		loginPOM.ClickLoginDropDown();	
-		loginPOM.sendEmailId("snbulusu3@gmail.com");
-		loginPOM.sendPassword("sneha1234567");
-		loginPOM.ClickLoginActual();
-		loginPOM.ClickOrderHistory();
-		loginPOM.ClickContinueButtonOnOrderHistoryPage();
 		
-		// Second Test cases - Priority - MEDIUM 
-		loginPOM.ClickEditAccountInfoLink();
-		loginPOM.sendCorrectFirstName("SnehaLataNew4");
-		loginPOM.sendCorrectLastName("BulusuNew4");
-		loginPOM.sendCorrectEmail("snbulusu4@gmail.com");
-		loginPOM.sendCorrectPhone("8971154491");
-		loginPOM.ClickContinueButtonOnEditInfoPage();
+	
+		LoginPOM_UniformLogin_PasswordChange.ClickMyAccountIcon();
+		LoginPOM_UniformLogin_PasswordChange.ClickLoginDropDown();	
+		LoginPOM_UniformLogin_PasswordChange.sendEmailId("snehab@gmail.com");
+		LoginPOM_UniformLogin_PasswordChange.sendPassword("sneha1234567");
+		LoginPOM_UniformLogin_PasswordChange.ClickLoginActual();
+				
 		
 		// Third Test cases - Priority - HIGH
 		
-		loginPOM.ClickChangeYourPasswordLink();
-		loginPOM.sendNewPassword("sneha12345678");
-		loginPOM.sendConfirmNewPassword("sneha12345678");
-		loginPOM.clickContinueToConfirmNewPassword();
-		
+		LoginPOM_UniformLogin_PasswordChange.ClickChangeYourPasswordLink();
+		LoginPOM_UniformLogin_PasswordChange.sendNewPassword("sneha12345678");
+		LoginPOM_UniformLogin_PasswordChange.sendConfirmNewPassword("sneha12345678");
+		LoginPOM_UniformLogin_PasswordChange.clickContinueToConfirmNewPassword();
+		LoginPOM_UniformLogin_PasswordChange.passwordChangeStatusAlert();
 		
 	}
 }
