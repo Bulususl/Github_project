@@ -275,7 +275,8 @@ and Next Month(July) visible which is why wrong dates might get picked up*/
 		System.out.println("*****"+NextDate);
 			this.SelectValidEndDate.click();
 				WebElement dateWidgetFrom = this.datePickerTable;
-				List<WebElement> columns = dateWidgetFrom.findElements(By.tagName("td"));
+				//List<WebElement> columns = dateWidgetFrom.findElements(By.tagName("td"));
+		List<WebElement> columns = dateWidgetFrom.findElements(By.xpath("//td[@class='dayactive today']//following-sibling::td[1]"));
 					for (WebElement cell: columns) {
 						if (cell.getText().equals(NextDate)) {
 							cell.click();
